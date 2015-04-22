@@ -14,6 +14,9 @@
 sudo apt-get update
 sudo apt-get -y install apache2
 
+#Apache restart
+sudo service apache2 restart
+
 # -y automatically passes YES when asked during the execution
 
 #That’s it. To check if Apache is installed, direct your browser 
@@ -87,6 +90,8 @@ echo "$SECURE_MYSQL"
  
 #aptitude -y purge expect
 
+#Apache restart
+sudo service apache2 restart
 
 
 #php installation 
