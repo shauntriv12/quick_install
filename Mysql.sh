@@ -5,7 +5,7 @@
 
 #root password variable:
 
-#command below takes 1st command line argument as root password and assignes it to MYSQL_ROOT_PASSWORD variable.
+#command below takes 1st command line argument as root password and assigns it to MYSQL_ROOT_PASSWORD variable.
 MYSQL_ROOT_PASSWORD=$1
 
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"
