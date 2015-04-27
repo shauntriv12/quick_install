@@ -10,15 +10,15 @@
 
 #sudo -s
 
-#Type the following command to create 512MB swap file (1024 * 512MB = 524288 block size):
+#Type the following command to create 1024MB swap file (1024 * 1024MB = 1048576 block size):
 
-dd if=/dev/zero of=/swapfile1 bs=1024 count=524288
+dd if=/dev/zero of=/swapfile1 bs=1024 count=1048576
 
 #Sample output should be:
 
-#524288+0 records in
-#524288+0 records out
-#536870912 bytes (537 MB) copied, 3.23347 s, 166 MB/s
+#1048576+0 records in
+#1048576+0 records out
+#1073741824 bytes (1.07GB) copied, 3.23347 s, 166 MB/s
 
 #security of the swap file:
 

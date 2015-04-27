@@ -1,6 +1,11 @@
 #!/bin/bash
 
-/bin/bash /home/script/lamp_test.sh
-/bin/bash /home/script/phpmyadmin_installation.sh
+#Swap_space installation
 /bin/bash /home/script/swap_space.sh
+
+#LAMP stack installation
+#/bin/bash /home/script/lamp_stack_link.sh "Mysql password"
+/bin/bash /home/script/lamp_stack_link.sh test_password
+
+
 

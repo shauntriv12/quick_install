@@ -3,9 +3,13 @@
 
 #MySQL installation
 
-# root password: shaun44371!
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password shaun44371!'
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password shaun44371!'
+#root password variable:
+
+#command below takes 1st command line argument as root password and assignes it to MYSQL_ROOT_PASSWORD variable.
+MYSQL_ROOT_PASSWORD=$1
+
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD"
 sudo apt-get -y install mysql-server libapache2-mod-auth-mysql php5-mysql
 
 #there might be errors like: 
@@ -31,7 +35,7 @@ sudo mysql_install_db
 aptitude -y install expect
  
 
-MYSQL_ROOT_PASSWORD=shaun44371!
+
  
 SECURE_MYSQL=$(expect -c "
 
