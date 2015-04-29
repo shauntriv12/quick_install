@@ -10,9 +10,11 @@
 #setsebool -P apache2_can_network_connect=1
 #reboot
 
+sudo apt-get update
+
 #To configer NTP server:
 
-sudo apt-get -y install NTP
+sudo apt-get -y install ntp
 
 cd /etc
 sed -i "s/server 0.*/server 0.us.pool.ntp.org"/ ntp.conf
@@ -27,9 +29,8 @@ service ntp restart
 
 #Now, we will create a database instant named "magento".
 
-mysql --user=root --password=shaun44371! -e "create database magento"
+mysql --user=root --password=$1 -e "create database magento"
 
-exit
 
 #Now, we will copy zip version of magento software into /var/www/magento folder.
 
@@ -37,19 +38,20 @@ exit
 #Link: https://www.magentocommerce.com/products/downloads/magento/ - download full release generally. 
 #Here, zip version is downloaded from above link and would be copied to server through wget command 
 #using dropbox link.
+
+#To install unzip package:
+sudo apt-get -y install unzip
  
 #In www, create a directory named magento. 
 
 cd /var/www
 mkdir magento
 cd magento 
-wget https://www.dropbox.com/s/ndu8loekuatt0l1/magento-1.9.1.0-2015-02-09-10-10-49.zip%2C%20attachment?dl=1
+wget -O magento.zip https://www.dropbox.com/s/ndu8loekuatt0l1/magento-1.9.1.0-2015-02-09-10-10-49.zip%2C%20attachment?dl=1
+
+#wget cpmmand above downloads file from the dropbox link and rename it to magento.zip
 
 #Always remember to change last dl=o to dl=1 while using dropbox link.
-
-#Now, rename zip version in the magento /var/www/magento to magento.zip using following command:
-
-mv magento-1.9.1.0-2015-02-09-10-10-49.zip\,\ attachment\?dl\=1.4 magento.zip
 
 #Now we will extract magento.zip file:
 
@@ -66,13 +68,11 @@ cd
 cd /var/www
 mkdir sample_data
 cd sample_data
-wget https://www.dropbox.com/s/lq2m73mf2dstqoy/magento-sample-data-1.9.1.0-2015-02-11-07-23-24.zip%2C%20attachment?dl=1
+wget -O sample_data.zip https://www.dropbox.com/s/lq2m73mf2dstqoy/magento-sample-data-1.9.1.0-2015-02-11-07-23-24.zip%2C%20attachment?dl=1
+
+#wget cpmmand above downloads file from the dropbox link and rename it to sample_data.zip
 
 #Always remember to change last dl=o to dl=1 while using dropbox link.
-
-#Now, rename zip version in the sample_data /var/www/sample_data to sample_data.zip using following command:
-
- mv magento-sample-data-1.9.1.0-2015-02-11-07-23-24.zip\,\ attachment\?dl\=1 sample_data.zip
 
 #Now, we will unzip sample_data.zip file.
 
@@ -81,23 +81,33 @@ unzip sample_data.zip
 #Copying contents from sample_data's media directory to magento's media directory. 
 
 cd
-cd /var/www/magento/media
-cp -R /var/www/magento-sample-data-1.9.1.0/media/* .
+cd ..
+cd /var/www/magento/magento/media
+cp -R /var/www/sample_data/magento-sample-data-1.9.1.0/media/* .
 
 ##Copying contents from sample_data's skin directory to magento's skin directory. 
 
 cd
-cd /var/www/magento/skin
-cp -R /var/www/magento-sample-data-1.9.1.0/skin/* .
+cd ..
+cd /var/www/magento/magento/skin
+cp -R /var/www/sample_data/magento-sample-data-1.9.1.0/skin/* .
 
 #Attaching sample_data's contents to "magento database" or mysql dump
 
-mysql --user=root --password=shaun44371! -e magento < /var/www/magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
+mysql -u root -p shaun magento < /var/www/sample_data/magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
 
 #Set permissions to all magento files and directories:
 
+cd
+cd ..
 chmod -R 777 /var/www/magento
 
 #Some additional packages are required to install to support magento:
 
 sudo apt-get install php5-curl
+sudo service apache2 restart
+
+
+
+#Magento is installed Now
+#In your browser, type IP/magento/magento to setup magento !! 
