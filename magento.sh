@@ -44,6 +44,8 @@ sudo apt-get -y install unzip
  
 #In www, create a directory named magento. 
 
+cd
+cd ..
 cd /var/www
 mkdir magento
 cd magento 
