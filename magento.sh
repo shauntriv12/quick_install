@@ -99,7 +99,7 @@ cp -R /var/www/sample_data/magento-sample-data-1.9.1.0/skin/* .
 cd
 cd ..
 cd /var/www/sample_data/magento-sample-data-1.9.1.0
-mysql -u root -p $1 magento < /var/www/sample_data/magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
+mysql --user=root --password=$1 magento < /var/www/sample_data/magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
 
 #Set permissions to all magento files and directories:
 
