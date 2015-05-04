@@ -94,7 +94,10 @@ cp -R /var/www/sample_data/magento-sample-data-1.9.1.0/skin/* .
 
 #Attaching sample_data's contents to "magento database" or mysql dump
 
-mysql -u root -p shaun magento < /var/www/sample_data/magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
+cd
+cd ..
+cd /var/www/sample_data/magento-sample-data-1.9.1.0
+mysql -u root -p $1 magento < /var/www/sample_data/magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
 
 #Set permissions to all magento files and directories:
 
@@ -104,7 +107,7 @@ chmod -R 777 /var/www/magento
 
 #Some additional packages are required to install to support magento:
 
-sudo apt-get install php5-curl
+sudo apt-get -y install php5-curl php5-gd
 sudo service apache2 restart
 
 
