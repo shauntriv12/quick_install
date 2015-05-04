@@ -1,7 +1,11 @@
 #!/bin/bash
 
 #php installation 
-sudo apt-get -y install php5 libapache2-mod-php5 php5-mcrypt
+
+sudo apt-get update
+sudo apt-get -y install php5 libapache2-mod-php5 php5-mcrypt php5-curl php5-gd
+
+sudo service apache2 restart
 
 #Commands below adds "index.php" into dir.conf file
 cd /etc/apache2/mods-enabled
